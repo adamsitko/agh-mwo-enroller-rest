@@ -47,25 +47,27 @@ public class MeetingRestController {
 		 return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
 	 }
 	 
-	 /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	 public ResponseEntity<?> deleteParticipant(@PathVariable("id") String login){
-		 if (participantService.findByLogin(login) == null) {
-			 return new ResponseEntity("Unable to delete. A participant with login given as " + login + " do not exist.", HttpStatus.CONFLICT);
+	 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	 public ResponseEntity<?> deleteMeeting(@PathVariable("id") String id){
+		 if (meetingService.findById(id) == null) {
+			 return new ResponseEntity("Unable to delete. A meeting with id given as " + id + " do not exist.", HttpStatus.CONFLICT);
 		 }
-		 Participant participant = participantService.findByLogin(login);
-		 participantService.delete(participant);
-		 return new ResponseEntity("A participant with login " + login + " has been deleted.", HttpStatus.OK);
+		 Meeting meeting = meetingService.findById(id);
+		 meetingService.delete(meeting);
+		 return new ResponseEntity("A meeting with id " + id + " has been deleted.", HttpStatus.OK);
 	 }
 	 
 	 @RequestMapping(value = "/{id}" , method = RequestMethod.PUT)
-	 public ResponseEntity<?> updateParticipant(@PathVariable("id") String login, @RequestBody Participant newParticipant){
-		 Participant participant = participantService.findByLogin(login);
-		 if (participant == null) {
-			 return new ResponseEntity("Unable to modify. A participant with login " + participant.getLogin() + " do not exist.", HttpStatus.CONFLICT);
+	 public ResponseEntity<?> updatemeeting(@PathVariable("id") String id, @RequestBody Meeting newMeeting){
+		 Meeting meeting = meetingService.findById(id);
+		 if (meeting == null) {
+			 return new ResponseEntity("Unable to modify. A meeting with id " + id + " do not exist.", HttpStatus.CONFLICT);
 		 }
-		 participant.setPassword(newParticipant.getPassword());
-		 participantService.update(participant);
-		 return new ResponseEntity("A participant with login " + participant.getLogin() + " has been update.", HttpStatus.OK);
-	 }*/
+		 meeting.setDescription(newMeeting.getDescription());
+		 meeting.setTitle(newMeeting.getTitle());
+		 meeting.setDate(newMeeting.getDate());
+		 meetingService.update(meeting);
+		 return new ResponseEntity("A meeting with id " + meeting.getId() + " has been update.", HttpStatus.OK);
+	 }
 
 }
