@@ -25,7 +25,7 @@ public class MeetingService {
 	}
 
 	public Meeting findById(String id) {
-		return (Meeting) connector.getSession().get(Meeting.class, id);
+		return (Meeting) connector.getSession().get(Meeting.class, Long.parseLong(id));
 	}
 
 }
