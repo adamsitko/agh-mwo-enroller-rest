@@ -38,16 +38,16 @@ public class MeetingRestController {
 	     return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	 }
 	
-	/*@RequestMapping(value = "", method = RequestMethod.POST)
-	 public ResponseEntity<?> registerParticipant(@RequestBody Participant participant){
-		 if (participantService.findByLogin(participant.getLogin()) != null) {
-			 return new ResponseEntity("Unable to create. A participant with login " + participant.getLogin() + " already exist.", HttpStatus.CONFLICT);
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	 public ResponseEntity<?> createMeeting(@RequestBody Meeting meeting){
+		 if (meetingService.findById(Long.toString(meeting.getId())) != null) {
+			 return new ResponseEntity("Unable to create. A meeting with id " + meeting.getId() + " already exist.", HttpStatus.CONFLICT);
 		 }
-		 participantService.create(participant);
-		 return new ResponseEntity<Participant>(participant, HttpStatus.CREATED);
+		 meetingService.create(meeting);
+		 return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
 	 }
 	 
-	 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	 /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	 public ResponseEntity<?> deleteParticipant(@PathVariable("id") String login){
 		 if (participantService.findByLogin(login) == null) {
 			 return new ResponseEntity("Unable to delete. A participant with login given as " + login + " do not exist.", HttpStatus.CONFLICT);

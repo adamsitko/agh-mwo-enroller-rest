@@ -28,4 +28,11 @@ public class MeetingService {
 		return (Meeting) connector.getSession().get(Meeting.class, Long.parseLong(id));
 	}
 
+	public void create(Meeting meeting) {
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().save(meeting);
+		transaction.commit();
+		
+	}
+
 }
